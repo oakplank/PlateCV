@@ -1,0 +1,12 @@
+# Core deep learning and computer vision libraries
+torch
+torchvision
+torchaudio
+ultralytics
+
+# Utility libraries
+pyyaml
+pandas
+matplotlib
+seaborn
+tqdm 

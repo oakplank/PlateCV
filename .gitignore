@@ -1,0 +1,19 @@
+# Ignore Python virtual environment
+.venv-gpu/
+
+# Ignore pycache files and compiled Python files
+__pycache__/
+*.pyc
+
+# Ignore training run artifacts, logs, and datasets that are too large
+runs/
+*.log
+dataset/
+
+# Ignore IDE and OS-specific files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db 
+
+*.pt

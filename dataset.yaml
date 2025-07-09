@@ -1,0 +1,10 @@
+path: dataset  # Dataset root directory
+train: train/images  # Train images relative to 'path'
+val: val/images     # Validation images relative to 'path'
+
+# Classes
+names:
+  0: license_plate  # Class names
+
+# Download script/URL (optional)
+download: null 
