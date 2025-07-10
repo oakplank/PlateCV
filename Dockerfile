@@ -12,7 +12,10 @@ RUN apt-get update && apt-get install -y \
 # Copy requirements first to leverage Docker cache
 COPY requirements.txt .
 
-# Install Python dependencies to user directory for easy copying
+# Install PyTorch CPU first with specific index URL
+RUN pip install --no-cache-dir --user torch==2.6.0+cpu torchvision==0.21.0+cpu --index-url https://download.pytorch.org/whl/cpu
+
+# Install remaining Python dependencies
 RUN pip install --no-cache-dir --user -r requirements.txt
 
 # Production stage
