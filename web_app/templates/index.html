@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License Plate Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>License Plate Detection</h1>
+            <p>Upload an image to detect license plates</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <div class="upload-icon">📁</div>
+                        <p>Click to select an image or drag and drop</p>
+                        <p class="file-types">Supported: JPG, PNG, GIF, BMP</p>
+                    </div>
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                </div>
+                
+                <button id="analyzeBtn" class="analyze-btn" disabled>
+                    <span id="btnText">Analyze Image</span>
+                    <div id="loadingSpinner" class="spinner" style="display: none;"></div>
+                </button>
+            </div>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <h2>Results</h2>
+                
+                <div class="status-message" id="statusMessage"></div>
+                
+                <div class="image-container">
+                    <img id="resultImage" alt="Processed image" />
+                </div>
+                
+                <div class="detection-info" id="detectionInfo"></div>
+            </div>
+
+            <div class="error-section" id="errorSection" style="display: none;">
+                <div class="error-message" id="errorMessage"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by YOLO v11 and Flask</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html> 

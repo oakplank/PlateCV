@@ -9,4 +9,9 @@ pyyaml
 pandas
 matplotlib
 seaborn
-tqdm 
+tqdm
+
+# Web UI dependencies
+flask
+pillow
+opencv-python 
