@@ -24,13 +24,21 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
-# Install runtime dependencies only
+# Install minimal runtime dependencies for OpenCV headless operation
 RUN apt-get update && apt-get install -y \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
     libxrender-dev \
     libgomp1 \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    libjpeg-dev \
+    libpng-dev \
+    libtiff-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    libswscale-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy installed packages from builder stage
@@ -48,9 +56,12 @@ COPY run_web_app.py .
 # Make sure scripts in .local are usable
 ENV PATH=/root/.local/bin:$PATH
 
-# Set environment variables for production
+# Set environment variables for production and headless operation
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
+ENV OPENCV_DISABLE_GUI=1
+ENV QT_QPA_PLATFORM=offscreen
+ENV DISPLAY=:99
 
 # Expose port
 EXPOSE $PORT

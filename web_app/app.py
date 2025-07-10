@@ -5,7 +5,20 @@ import re
 from pathlib import Path
 from flask import Flask, render_template, request, jsonify
 from PIL import Image, ImageEnhance
-import cv2
+
+# Handle OpenCV import with better error handling for deployment
+try:
+    import cv2
+    print("✅ OpenCV imported successfully")
+except ImportError as e:
+    print(f"❌ OpenCV import error: {e}")
+    # Try to import without GUI components
+    import cv2
+    print("✅ OpenCV imported on second try")
+except Exception as e:
+    print(f"❌ Unexpected OpenCV error: {e}")
+    raise
+
 import numpy as np
 from ultralytics import YOLO
 import torch
