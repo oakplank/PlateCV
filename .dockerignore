@@ -1,0 +1,42 @@
+# Dataset and large files
+dataset/
+*.pt
+*.pth
+!runs/train/weights/*.pt
+
+# Temporary files
+uploads/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git files
+.git/
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Cache files
+.cache/
+pip-cache/
+.pytest_cache/
+
+# Log files
+*.log 
