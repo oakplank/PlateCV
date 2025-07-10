@@ -1,0 +1,6 @@
+batch_size: 16
+epochs: 100
+image_size: 640
+patience: 20
+val_frequency: 1
+workers: 8
