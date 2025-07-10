@@ -16,5 +16,5 @@ pytesseract==0.3.10
 # Additional dependencies for Railway
 gunicorn==21.2.0
 
-# Computer vision (will install PyTorch CPU separately)
-ultralytics==8.0.200 
+# Computer vision - latest version with C3k2 support
+ultralytics==8.3.104 
