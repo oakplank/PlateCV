@@ -14,4 +14,9 @@ tqdm
 # Web UI dependencies
 flask
 pillow
-opencv-python 
+opencv-python
+
+# OCR dependencies
+easyocr
+pytesseract
+Pillow 

@@ -130,8 +130,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showResults(data) {
+        // Count detections with OCR text
+        const detectionsWithText = data.detections.filter(d => d.text).length;
+        const totalDetections = data.detections.length;
+        
         // Update status message
-        statusMessage.textContent = data.message;
+        let message = data.message;
+        if (totalDetections > 0 && detectionsWithText > 0) {
+            message += ` (${detectionsWithText}/${totalDetections} plates read successfully)`;
+        } else if (totalDetections > 0 && detectionsWithText === 0) {
+            message += ` (text could not be read)`;
+        }
+        
+        statusMessage.textContent = message;
         statusMessage.className = data.detections.length > 0 ? 'status-message' : 'status-message no-detection';
 
         // Show result image
@@ -163,12 +174,22 @@ document.addEventListener('DOMContentLoaded', function() {
             
             html += `
                 <div class="detection-item">
-                    <div class="detection-header">Detection ${index + 1}</div>
+                    <div class="detection-header">
+                        Detection ${index + 1}
+                        ${detection.text ? `<span class="plate-text">📋 ${detection.text}</span>` : ''}
+                    </div>
                     <div class="detection-details">
                         <div><strong>Class:</strong> ${detection.class}</div>
                         <div><strong>Confidence:</strong> ${(detection.confidence * 100).toFixed(1)}%</div>
                         <div><strong>Position:</strong> (${x1}, ${y1})</div>
                         <div><strong>Size:</strong> ${width} × ${height} pixels</div>
+                        ${detection.text ? `
+                            <div><strong>License Text:</strong> ${detection.text}</div>
+                            <div><strong>OCR Method:</strong> ${detection.ocr_method}</div>
+                            <div><strong>OCR Confidence:</strong> ${(detection.ocr_confidence * 100).toFixed(1)}%</div>
+                        ` : `
+                            <div><strong>License Text:</strong> <span style="color: #999;">Could not read</span></div>
+                        `}
                     </div>
                 </div>
             `;

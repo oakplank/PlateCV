@@ -37,7 +37,9 @@ try:
         print("Press Ctrl+C to stop the server")
         print("=" * 60)
         
-        app.run(debug=False, host='127.0.0.1', port=5000)
+        # Use Railway's assigned port or default to 5000
+        port = int(os.environ.get('PORT', 5000))
+        app.run(debug=False, host='0.0.0.0', port=port)
     else:
         print("Failed to load model. Please check if best.pt exists in runs/train/weights/")
         sys.exit(1)
