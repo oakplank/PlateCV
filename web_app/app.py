@@ -223,7 +223,30 @@ def load_model():
             return False
             
         print(f"📦 Loading YOLO model from {model_path}")
+        
+        # Fix for PyTorch 2.6 weights_only security changes
+        # Add safe globals for YOLO model loading
+        try:
+            from ultralytics.nn.tasks import DetectionModel
+            torch.serialization.add_safe_globals([DetectionModel])
+            print("✅ Added DetectionModel to safe globals for PyTorch 2.6")
+        except Exception as e:
+            print(f"⚠️  Could not add safe globals: {e}")
+            # Try the alternative approach - temporarily disable weights_only
+            import torch._utils
+            original_load = torch.load
+            def patched_load(*args, **kwargs):
+                kwargs.setdefault('weights_only', False)
+                return original_load(*args, **kwargs)
+            torch.load = patched_load
+            print("✅ Temporarily disabled weights_only for model loading")
+        
         model = YOLO(str(model_path))
+        
+        # Restore original torch.load if we patched it
+        if 'original_load' in locals():
+            torch.load = original_load
+            print("✅ Restored original torch.load")
         
         # Print model information
         print(f"✅ Model loaded successfully!")
