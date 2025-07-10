@@ -6,9 +6,16 @@ __pycache__/
 *.pyc
 
 # Ignore training run artifacts, logs, and datasets that are too large
-runs/
+runs/detect/
+runs/train/args.yaml
+runs/train/results.csv
+runs/train/*.jpg
 *.log
 dataset/
+
+# Keep the trained model for deployment
+!runs/train/weights/best.pt
+!runs/train/weights/last.pt
 
 # Ignore web app uploads
 web_app/uploads/*
@@ -20,4 +27,6 @@ web_app/uploads/*
 .DS_Store
 Thumbs.db 
 
+# Ignore other model files but keep our trained ones
 *.pt
+!runs/train/weights/*.pt
